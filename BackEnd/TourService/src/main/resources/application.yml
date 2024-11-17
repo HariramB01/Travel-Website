@@ -1,0 +1,15 @@
+server:
+  port: 8084
+
+
+spring:
+  application:
+    name: tour-service
+
+  config:
+    import: optional:configserver:http://localhost:8081
+
+  cloud:
+    config:
+      uri: http://localhost:8081
+

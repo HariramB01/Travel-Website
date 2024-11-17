@@ -1,0 +1,27 @@
+server:
+  port: 8082
+
+spring:
+  application:
+    name: api-gateway
+  cloud:
+    config:
+      uri: http://localhost:8081
+    loadbalancer:
+      enabled: true
+    gateway:
+      routes:
+        - id: user-service
+          uri: lb://USER-SERVICE
+          predicates:
+            - Path=/api/user/**
+        - id: booking-service
+          uri: lb://BOOKING-SERVICE
+          predicates:
+            - Path=/api/booking/**
+        - id: tour-service
+          uri: lb://TOUR-SERVICE
+          predicates:
+            - Path=/api/tour/**
+  config:
+    import: optional:configserver:http://localhost:8081
